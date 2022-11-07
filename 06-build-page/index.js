@@ -25,6 +25,7 @@ async function app(){
   
   async function writeToString(txt){
     let msg = txt;
+    if(txt)
     fs.readdir(componentFolder, (err, files) => {
       files.forEach(async file => {
         fs.stat(componentFolder + file, async (err, stats) => {
