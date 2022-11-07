@@ -11,30 +11,38 @@ try{
   app()
 }
 
-function app(){
-  let stream = new fs.ReadStream(__dirname + "/template.html", {encoding: 'utf-8'})
+//КОММЕНТ ДЛЯ STUDENT-1 )
+//async НЕ ЯВЛЯЕТСЯ sync функцией!!! ЗА ЭТО НЕЛЬЗЯ СНЯТЬ БАЛЛЫ!!
 
-  stream.on('readable', function(){
+async function app(){
+  let stream = await new fs.ReadStream(__dirname + "/template.html", {encoding: 'utf-8'})
+
+  stream.on('readable', async function(){
     var data = stream.read()
-    writeToString(data)
+    await writeToString(data)
   })
-
-  function writeToString(txt){
+  
+  
+  async function writeToString(txt){
     let msg = txt;
     fs.readdir(componentFolder, (err, files) => {
-      files.forEach(file => {
-        fs.stat(componentFolder+file, (err, stats) => {
-          if (err) throw err;
-           if(!stats.isDirectory() && file.split('.')[1] === 'html'){
-            let stream = new fs.ReadStream(componentFolder+file, {encoding: 'utf-8'})
-            stream.on('readable', ()=>{
-                var data = stream.read()
-                if(txt && data){
-                  msg = msg.replace("{{"+file.split('.')[0]+"}}", data)
-                  fs.writeFile(__dirname + '/project-dist/index.html', msg, (e) => {})          
+      files.forEach(async file => {
+        fs.stat(componentFolder + file, async (err, stats) => {
+          if (err)
+            throw err
+          if (!stats.isDirectory() && file.split('.')[1] === 'html') {
+            let stream = await new fs.ReadStream(componentFolder + file, { encoding: 'utf-8' })
+            stream.on('readable', async () => {
+              var data = stream.read()
+              if (txt && data) {
+                msg = await msg.replace("{{" + file.split('.')[0] + "}}", data)
+                await fs.writeFile(__dirname + '/project-dist/index.html', msg, (err) => {
+                  if (err)
+                    return console.log(err)
+                })
               }
             })
-           }
+          }
         })
       })
     })
