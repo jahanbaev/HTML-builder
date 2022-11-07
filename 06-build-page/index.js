@@ -31,9 +31,7 @@ function app(){
                 var data = stream.read()
                 if(txt && data){
                   msg = msg.replace("{{"+file.split('.')[0]+"}}", data)
-                  fs.writeFile(__dirname + '/project-dist/index.html', msg, (err) => {
-                  if (err) return console.log(err)
-                })          
+                  fs.writeFile(__dirname + '/project-dist/index.html', msg, (e) => {})          
               }
             })
            }
