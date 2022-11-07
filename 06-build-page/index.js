@@ -27,10 +27,10 @@ function app(){
           if (err) throw err;
            if(!stats.isDirectory() && file.split('.')[1] === 'html'){
             let stream = new fs.ReadStream(componentFolder+file, {encoding: 'utf-8'})
-            stream.on('readable', function(){
+            stream.on('readable', ()=>{
                 var data = stream.read()
                 if(txt && data){
-                  msg = msg.replace("{{"+file.split('.')[0]+"}}", data).replace('style.css','bundle.css')
+                  msg = msg.replace("{{"+file.split('.')[0]+"}}", data)
                   fs.writeFile(__dirname + '/project-dist/index.html', msg, (err) => {
                   if (err) return console.log(err)
                 })          
@@ -44,7 +44,7 @@ function app(){
 
   ensureExists(__dirname + '/project-dist/', 0o744, (err) => {})
 
-  fs.writeFile(__dirname + '/project-dist/bundle.css', '', (err) => {
+  fs.writeFile(__dirname + '/project-dist/style.css', '', (err) => {
     if (err) return console.log(err)
   })
 
