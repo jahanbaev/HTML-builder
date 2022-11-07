@@ -67,7 +67,7 @@ function app(){
     stream.on('readable', function(){
       var data = stream.read();
       if(data != null)
-      fs.appendFile(__dirname + '/project-dist/bundle.css', '\n'+data, (err) => {
+      fs.appendFile(__dirname + '/project-dist/style.css', '\n'+data, (err) => {
         if (err) return console.log(err)
       })
     })
