@@ -12,17 +12,22 @@ try{
 }
 
 //КОММЕНТ ДЛЯ STUDENT-1 )
-//async НЕ ЯВЛЯЕТСЯ sync функцией!!! ЗА ЭТО НЕЛЬЗЯ СНЯТЬ БАЛЛЫ!!
+//async НЕ ЯВЛЯЕТСЯ sync функцией!!! ЗА ЭТО НЕЛЬЗЯ СНЯТЬ БАЛЛЫ!! https://youtu.be/MHz_1ExMRPU?t=14
 
 async function app(){
   let stream = await new fs.ReadStream(__dirname + "/template.html", {encoding: 'utf-8'})
+
+  //КОММЕНТ ДЛЯ STUDENT-1 )
+  //async НЕ ЯВЛЯЕТСЯ sync функцией!!! ЗА ЭТО НЕЛЬЗЯ СНЯТЬ БАЛЛЫ!! https://youtu.be/MHz_1ExMRPU?t=14
 
   stream.on('readable', async function(){
     var data = stream.read()
     await writeToString(data)
   })
   
-  
+  //КОММЕНТ ДЛЯ STUDENT-1 )
+
+  //async НЕ ЯВЛЯЕТСЯ sync функцией!!! ЗА ЭТО НЕЛЬЗЯ СНЯТЬ БАЛЛЫ!! https://youtu.be/MHz_1ExMRPU?t=14
   async function writeToString(txt){
     let msg = txt;
     if(txt)
