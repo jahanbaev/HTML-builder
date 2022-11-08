@@ -12,7 +12,7 @@ process.on('beforeExit', (code) => {
 
 console.log('привет, вводите ваш текст:')
 
-const setInput = () =>{
+const setInput = (n) =>{
   readline.question('->', txt => {
 
     if(txt == 'exit'){
@@ -20,11 +20,11 @@ const setInput = () =>{
       process.exit()
     }
 
-    fs.appendFile(__dirname + '/text.txt', '\n'+txt, (err) => {
+    fs.appendFile(__dirname + '/text.txt', n+txt, (err) => {
       if (err) return console.log(err)
     })
     
-    setInput()
+    setInput('\n')
 
   })
 }
