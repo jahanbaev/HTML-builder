@@ -20,7 +20,7 @@ const setInput = (n) =>{
       process.exit()
     }
 
-    fs.appendFile(__dirname + '/text.txt', `${n?n:''}+${txt}`, (err) => {
+    fs.appendFile(__dirname + '/text.txt', `${n?n:''}${txt}`, (err) => {
       if (err) return console.log(err)
     })
     
