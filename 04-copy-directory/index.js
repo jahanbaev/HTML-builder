@@ -1,8 +1,20 @@
 const fs = require('fs')
-const rimraf = require("rimraf")
 const folder = __dirname + '/files'
 
-try{rimraf(folder+"-copy", ()=>{app()})}catch(e){app()}
+fs.readdir(folder+"/", (err, files) => {
+  files.forEach(file => {
+    fs.rm(folder+"-copy"+file, { recursive:true }, (err) => {
+    if(err){
+        console.error(err.message);
+        return;
+    }
+    console.log("File deleted successfully");
+    })
+  })
+})
+
+
+///try{rimraf(folder+"-copy", ()=>{app()})}catch(e){app()}
 
 function app(){
 ensureExists(folder+"-copy", 0o744, (err) => {})
