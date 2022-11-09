@@ -1,22 +1,26 @@
 const fs = require('fs')
 const folder = __dirname + '/files'
 
-fs.readdir(folder+"/", (err, files) => {
+fs.readdir(folder+"-copy/", (err, files) => {
+  try{
   files.forEach(file => {
-    fs.rm(folder+"-copy"+file, { recursive:true }, (err) => {
+    fs.rm(folder+"-copy/"+file, { recursive:true }, (err) => {
     if(err){
         console.error(err.message);
         return;
     }
-    console.log("File deleted successfully");
+    app()
     })
   })
+}catch(e){
+  app()
+}
 })
 
 
-///try{rimraf(folder+"-copy", ()=>{app()})}catch(e){app()}
-
+let used = 0;
 function app(){
+  if(used > 0) {return 0}else{used++}
 ensureExists(folder+"-copy", 0o744, (err) => {})
   
 fs.readdir(folder+"/", (err, files) => {
